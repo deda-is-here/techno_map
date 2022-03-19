@@ -1,9 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
+from app import db
 
-from db import Base, engine
 
-
-class ClubInfo(Base):
+class ClubInfo(db.Base):
 
     __tablename__ = "club info"
 
@@ -15,7 +14,7 @@ class ClubInfo(Base):
         return f"Club name: {self.club_name},\nClub address: {self.club_address},"
 
 
-class User(Base):
+class User(db.Base):
 
     __tablename__ = "user info"
 
@@ -27,7 +26,7 @@ class User(Base):
         return f"Username: {self.name}"
 
 
-class ClubContactInfo(Base):
+class ClubContactInfo(db.Base):
 
     __tablename__ = "contact info"
 
@@ -45,4 +44,4 @@ class ClubContactInfo(Base):
 
 
 if __name__ == "__main__":
-    Base.metadata.create_all(bind=engine)
+    db.Base.metadata.create_all(bind=db.engine)
