@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Date
 from app import db
 
 
@@ -19,7 +19,9 @@ class User(db.Base):
     __tablename__ = "user info"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(120), index=True, unique=True)
+    name = Column(String(120), index=True)
+    login = Column(String(120), index=True, unique=True)
+    created_date = Column(Date(), nullable=False)
     password_hash = Column(String(128))
 
     def __repr__(self):
