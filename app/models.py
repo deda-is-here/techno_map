@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date
+from sqlalchemy.orm import relationship
 from app import db
 
 
@@ -9,6 +10,7 @@ class ClubInfo(db.Base):
     id = Column(Integer, primary_key=True)
     club_name = Column(String(120), index=True, unique=True)
     club_address = Column(String(120), index=True, unique=True)
+    club_contact = relationship('ClubContactInfo', backref='contact')
 
     def __repr__(self):
         return f"Club name: {self.club_name},\nClub address: {self.club_address},"
@@ -33,7 +35,7 @@ class ClubContactInfo(db.Base):
     __tablename__ = "contact info"
 
     id = Column(Integer, primary_key=True)
-    club_id = Column(Integer, ForeignKey(ClubInfo.id), primary_key=True)
+    club_id = Column(Integer, ForeignKey("ClubInfo.id"))
     contact_username = Column(String(120), index=True, unique=True)
     contact_email = Column(String(120), index=True, unique=True)
     contact_password_hash = Column(String(128))
